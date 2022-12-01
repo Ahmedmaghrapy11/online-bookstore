@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # new 
     # 3rd party
-    'crispy_forms',
+    'crispy_forms',  # new
+    'allauth',  # new
+    'allauth.account',  #  new
     # new local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig'
@@ -141,4 +144,32 @@ LOGIN_REDIRECT_URL = 'home'  # new
 
 LOGOUT_REDIRECT_URL = 'home' # new
 
+ACCOUNT_LOGOUT_REDIRECT = 'home'  # new
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
+
+# django-allauth configurations
+SITE_ID = 1     # new
+
+# authentication configuration for the email registration
+AUTHENTICATION_BACKENDS = (     # new
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# remember me configuration
+ACCOUNT_SESSION_REMEMBER = True     # new
+
+# asking for password one time in registration
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+ACCOUNT_USERNAME_REQUIRED = False
+
+ACCOUNT_AUTHENTICATION_METHOD = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_UNIQUE_EMAIL = True
+
+# overridding the email to be sent to the console instead of smtp server
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # new
